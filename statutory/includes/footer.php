@@ -163,47 +163,42 @@ $featuredServices = array_slice(array_values($featuredServices), 0, 8);
             </div>
         </div>
 
-        <!-- Resources & Tools -->
+        <!-- Calculators -->
         <div class="border-t border-gray-800 pt-8 mb-8">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <div>
-                    <h5 class="text-white font-medium mb-3 text-sm">Resources</h5>
+                    <h5 class="text-white font-medium mb-3 text-sm">Tax & Investment Calculators</h5>
                     <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="#" class="hover:text-emerald-500 transition-colors">GST Resources</a></li>
-                        <li><a href="#" class="hover:text-emerald-500 transition-colors">ITR Resources</a></li>
-                        <li><a href="#" class="hover:text-emerald-500 transition-colors">Company Registration Guide</a></li>
-                        <li><a href="#" class="hover:text-emerald-500 transition-colors">Tax Planning</a></li>
-                        <li><a href="#" class="hover:text-emerald-500 transition-colors">Compliance Calendar</a></li>
+                        <li><a href="<?php echo $basePath; ?>/calculators/income-tax-calculator.php" class="hover:text-emerald-500 transition-colors">Income Tax Calculator</a></li>
+                        <li><a href="<?php echo $basePath; ?>/calculators/gst-calculator.php" class="hover:text-emerald-500 transition-colors">GST Calculator</a></li>
+                        <li><a href="<?php echo $basePath; ?>/calculators/tax-saving-calculator.php" class="hover:text-emerald-500 transition-colors">Tax Saving Calculator</a></li>
+                        <li><a href="<?php echo $basePath; ?>/calculators/salary-calculator.php" class="hover:text-emerald-500 transition-colors">Salary Calculator</a></li>
+                        <li><a href="<?php echo $basePath; ?>/calculators/hra-calculator.php" class="hover:text-emerald-500 transition-colors">HRA Calculator</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h5 class="text-white font-medium mb-3 text-sm">Tools</h5>
+                    <h5 class="text-white font-medium mb-3 text-sm">Loan Calculators</h5>
                     <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="#" class="hover:text-emerald-500 transition-colors">GST Calculator</a></li>
-                        <li><a href="#" class="hover:text-emerald-500 transition-colors">Tax Calculator</a></li>
-                        <li><a href="#" class="hover:text-emerald-500 transition-colors">HSN Code Finder</a></li>
-                        <li><a href="#" class="hover:text-emerald-500 transition-colors">GST Number Search</a></li>
-                        <li><a href="#" class="hover:text-emerald-500 transition-colors">PAN Verification</a></li>
+                        <li><a href="<?php echo $basePath; ?>/calculators/emi-calculator.php" class="hover:text-emerald-500 transition-colors">EMI Calculator</a></li>
+                        <li><a href="<?php echo $basePath; ?>/calculators/home-loan-emi-calculator.php" class="hover:text-emerald-500 transition-colors">Home Loan EMI</a></li>
+                        <li><a href="<?php echo $basePath; ?>/calculators/compound-interest-calculator.php" class="hover:text-emerald-500 transition-colors">Compound Interest</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h5 class="text-white font-medium mb-3 text-sm">Company</h5>
+                    <h5 class="text-white font-medium mb-3 text-sm">Investment Calculators</h5>
                     <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="#" class="hover:text-emerald-500 transition-colors">About Us</a></li>
-                        <li><a href="#" class="hover:text-emerald-500 transition-colors">Careers</a></li>
-                        <li><a href="#" class="hover:text-emerald-500 transition-colors">Media & Press</a></li>
-                        <li><a href="#" class="hover:text-emerald-500 transition-colors">Trust & Safety</a></li>
-                        <li><a href="#" class="hover:text-emerald-500 transition-colors">Contact Us</a></li>
+                        <li><a href="<?php echo $basePath; ?>/calculators/sip-calculator.php" class="hover:text-emerald-500 transition-colors">SIP Calculator</a></li>
+                        <li><a href="<?php echo $basePath; ?>/calculators/mutual-fund-calculator.php" class="hover:text-emerald-500 transition-colors">Mutual Fund Calculator</a></li>
+                        <li><a href="<?php echo $basePath; ?>/calculators/ppf-calculator.php" class="hover:text-emerald-500 transition-colors">PPF Calculator</a></li>
+                        <li><a href="<?php echo $basePath; ?>/calculators/nps-calculator.php" class="hover:text-emerald-500 transition-colors">NPS Calculator</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h5 class="text-white font-medium mb-3 text-sm">Support</h5>
+                    <h5 class="text-white font-medium mb-3 text-sm">Deposit Calculators</h5>
                     <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="#" class="hover:text-emerald-500 transition-colors">Help Center</a></li>
-                        <li><a href="#" class="hover:text-emerald-500 transition-colors">FAQs</a></li>
-                        <li><a href="#" class="hover:text-emerald-500 transition-colors">Product Support</a></li>
-                        <li><a href="#" class="hover:text-emerald-500 transition-colors">Live Chat</a></li>
-                        <li><a href="#" class="hover:text-emerald-500 transition-colors">Ticket Support</a></li>
+                        <li><a href="<?php echo $basePath; ?>/calculators/fd-calculator.php" class="hover:text-emerald-500 transition-colors">FD Calculator</a></li>
+                        <li><a href="<?php echo $basePath; ?>/calculators/rd-calculator.php" class="hover:text-emerald-500 transition-colors">RD Calculator</a></li>
+                        <li><a href="<?php echo $basePath; ?>/calculators/pf-calculator.php" class="hover:text-emerald-500 transition-colors">PF Calculator</a></li>
                     </ul>
                 </div>
             </div>
