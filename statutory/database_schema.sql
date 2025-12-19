@@ -68,8 +68,12 @@ CREATE TABLE IF NOT EXISTS package_features (
 CREATE TABLE IF NOT EXISTS service_details (
   id INT AUTO_INCREMENT PRIMARY KEY,
   service_id INT UNIQUE NOT NULL,
-  full_description TEXT,
   overview TEXT,
+  full_description TEXT,
+  processing_time VARCHAR(255),
+  documents_required TEXT,
+  faqs TEXT,
+  benefits TEXT,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (service_id) REFERENCES services(id) ON DELETE CASCADE,
   INDEX idx_service_id (service_id)
@@ -510,6 +514,165 @@ INSERT INTO package_features (package_id, feature, display_order) VALUES
 (18, 'Compliance Review', 3),
 (18, 'Dedicated Tax Advisor', 4),
 (18, 'Priority Support', 5);
+
+-- =====================================================
+-- Insert Service Details
+-- =====================================================
+
+-- Service Details for Private Limited Company Registration (Service ID: 1)
+INSERT INTO service_details (service_id, overview, full_description, processing_time, documents_required, benefits, faqs) VALUES
+(1, 
+'Private Limited Company is the most popular business structure in India. It offers limited liability protection, separate legal entity status, and easier access to funding.',
+'Private Limited Company registration in India provides a robust foundation for your business with limited liability protection, perpetual succession, and enhanced credibility. Our comprehensive service includes DSC, DIN, name approval, incorporation certificate, MOA, AOA, PAN, and TAN.',
+'10-15 business days',
+'PAN Card of Directors|Aadhaar Card of Directors|Address Proof (Electricity Bill/Rent Agreement)|Passport Size Photos|Registered Office Address Proof|NOC from Property Owner (if rented)',
+'Limited Liability Protection|Separate Legal Entity|Easy Fundraising|Perpetual Succession|Enhanced Credibility|Tax Benefits|Easy Transfer of Shares',
+'What is a Private Limited Company?|A Private Limited Company is a business structure where shareholders have limited liability and the company is a separate legal entity.|What is the minimum capital required?|There is no minimum capital requirement. You can start with any amount.|Can a single person form a Private Limited Company?|No, minimum 2 directors and 2 shareholders are required. For single person, consider OPC.|What are the compliance requirements?|Annual filing of financial statements, annual returns, and board meetings are mandatory.|Is foreign investment allowed?|Yes, subject to FDI guidelines and sectoral caps.'
+);
+
+-- Service Details for Limited Liability Partnership (Service ID: 3)
+INSERT INTO service_details (service_id, overview, full_description, processing_time, documents_required, benefits, faqs) VALUES
+(3,
+'LLP combines the benefits of partnership and company structure. It offers limited liability with operational flexibility.',
+'Limited Liability Partnership (LLP) registration provides the flexibility of a partnership with the protection of limited liability. Ideal for professionals and service businesses.',
+'12-18 business days',
+'PAN Card of Partners|Aadhaar Card of Partners|Address Proof|Passport Size Photos|Registered Office Address Proof|LLP Agreement Draft',
+'Limited Liability|Operational Flexibility|Less Compliance|No Minimum Capital|Tax Benefits|Easy to Dissolve',
+'What is an LLP?|LLP is a hybrid structure combining features of partnership and company.|What is the minimum number of partners?|Minimum 2 partners are required. At least one must be resident in India.|What are the compliance requirements?|LLP needs to file Form 8 and Form 11 annually.|Can LLP raise funds?|LLP cannot issue shares but can raise funds through partners capital.'
+);
+
+-- Service Details for GST Registration (Service ID: 14)
+INSERT INTO service_details (service_id, overview, full_description, processing_time, documents_required, benefits, faqs) VALUES
+(14,
+'GST Registration is mandatory for businesses with turnover exceeding ₹20 lakh (₹10 lakh for special states). Essential for legal business operations.',
+'GST (Goods and Services Tax) registration enables your business to collect and remit GST, claim input tax credit, and operate legally in India.',
+'5-7 business days',
+'PAN Card|Aadhaar Card|Business Address Proof|Bank Account Details|Digital Signature Certificate|Photographs|Business Registration Certificate',
+'Legal Business Operations|Input Tax Credit|Wider Customer Base|Online Business Eligibility|Compliance with Law',
+'Who needs GST registration?|Businesses with annual turnover above ₹20 lakh (₹10 lakh for special states) must register.|What is the penalty for not registering?|Penalty of 10% of tax due or ₹10,000, whichever is higher.|Can I register voluntarily?|Yes, businesses below threshold can register voluntarily.|Is GST registration free?|No, government fees apply. Our service includes all fees.|What documents are needed?|PAN, address proof, bank details, and business registration documents.'
+);
+
+-- Service Details for Private Limited Company Annual Filing (Service ID: 25)
+INSERT INTO service_details (service_id, overview, full_description, processing_time, documents_required, benefits, faqs) VALUES
+(25,
+'Annual compliance filing is mandatory for all Private Limited Companies. Includes AOC-4, MGT-7, and ADT-1 forms.',
+'Annual filing ensures your company remains compliant with ROC requirements. Includes financial statements, annual return, and auditor appointment.',
+'15-20 business days',
+'Financial Statements (Balance Sheet, P&L)|Annual Return|Auditor Appointment Details|Board Meeting Minutes|AGM Minutes|Directors Report',
+'Maintain Active Status|Avoid Penalties|Legal Compliance|Good Corporate Governance|Business Credibility',
+'What is annual filing?|Annual filing includes submission of financial statements and annual return to ROC.|What are the due dates?|AOC-4: 30 days from AGM, MGT-7: 60 days from AGM.|What happens if I miss the deadline?|Late fees and penalties apply. Company status may become inactive.|Is audit mandatory?|Yes, for companies with turnover above ₹1 crore or capital above ₹10 lakh.|Can I file myself?|Yes, but professional assistance ensures accuracy and compliance.'
+);
+
+-- Service Details for Trademark Registration (Service ID: 37)
+INSERT INTO service_details (service_id, overview, full_description, processing_time, documents_required, benefits, faqs) VALUES
+(37,
+'Trademark registration protects your brand name, logo, and slogan. Provides exclusive rights and legal protection.',
+'Trademark registration gives you exclusive rights to use your brand mark and prevents others from using similar marks. Essential for brand protection.',
+'6-12 months (Registration Certificate)',
+'Trademark Logo/Word|Applicant Identity Proof|Applicant Address Proof|Power of Attorney|User Affidavit (if claiming prior use)|Business Registration Certificate',
+'Exclusive Rights|Brand Protection|Legal Recourse|Business Value|Asset Creation|Global Protection',
+'What can be trademarked?|Brand names, logos, slogans, sounds, and even colors can be trademarked.|How long does it take?|6-12 months for registration certificate, but protection starts from application date.|What is trademark validity?|Trademark is valid for 10 years and can be renewed indefinitely.|What if someone uses my trademark?|You can take legal action for infringement once registered.|Is trademark search necessary?|Yes, to check if similar marks exist and avoid objections.'
+);
+
+-- Service Details for Tax Consultancy Services (Service ID: 46)
+INSERT INTO service_details (service_id, overview, full_description, processing_time, documents_required, benefits, faqs) VALUES
+(46,
+'Expert tax consultancy helps optimize your tax liability, ensure compliance, and maximize savings through strategic planning.',
+'Professional tax consultancy services for individuals and businesses. Includes tax planning, compliance review, and optimization strategies.',
+'Ongoing Service',
+'Previous Tax Returns|Financial Statements|Investment Proofs|Salary Slips|Form 16|Bank Statements',
+'Tax Optimization|Compliance Assurance|Expert Guidance|Savings Maximization|Risk Mitigation',
+'What is tax consultancy?|Professional advice on tax planning, compliance, and optimization.|How can it help me?|Reduces tax liability, ensures compliance, and maximizes savings.|When should I consult?|Before financial year end for planning, and during year for compliance.|Is it only for businesses?|No, individuals and businesses both can benefit from tax consultancy.|What documents are needed?|Financial statements, tax returns, and investment proofs.'
+);
+
+-- Service Details for PAN Application (Service ID: 16)
+INSERT INTO service_details (service_id, overview, full_description, processing_time, documents_required, benefits, faqs) VALUES
+(16,
+'PAN (Permanent Account Number) is mandatory for financial transactions, tax filing, and business operations in India.',
+'PAN is a 10-character alphanumeric identifier issued by Income Tax Department. Required for all financial and tax-related transactions.',
+'7-10 business days',
+'Identity Proof (Aadhaar/Passport/Voter ID)|Address Proof|Date of Birth Proof|Passport Size Photo|Form 49A (for Indian citizens)',
+'Mandatory for Tax Filing|Required for Bank Accounts|Needed for Investments|Business Operations|Financial Transactions',
+'Who needs PAN?|All individuals and entities earning taxable income or conducting financial transactions.|What documents are accepted?|Aadhaar, Passport, Voter ID, Driving License for identity proof.|Can I apply online?|Yes, online application is available through NSDL or UTIITSL.|What is the fee?|₹107 for Indian communication address, ₹989 for foreign address.|How long is PAN valid?|PAN is permanent and valid for lifetime.'
+);
+
+-- Service Details for TAN Application (Service ID: 17)
+INSERT INTO service_details (service_id, overview, full_description, processing_time, documents_required, benefits, faqs) VALUES
+(17,
+'TAN (Tax Deduction and Collection Account Number) is mandatory for entities deducting or collecting tax at source.',
+'TAN is required for filing TDS/TCS returns. Mandatory for employers, businesses making payments subject to TDS, and entities collecting tax.',
+'7-10 business days',
+'PAN Card|Address Proof|Business Registration Certificate|Form 49B|Authorized Signatory Details',
+'Mandatory for TDS Filing|Legal Compliance|Smooth Tax Operations|Required for Employers|Business Requirement',
+'Who needs TAN?|All entities deducting or collecting tax at source must have TAN.|Is TAN different from PAN?|Yes, TAN is for TDS/TCS operations, PAN is for income tax.|Can one entity have multiple TAN?|No, one entity can have only one TAN.|What is the penalty for not having TAN?|Penalty of ₹10,000 for non-compliance.|Is TAN mandatory for all businesses?|Only if you deduct or collect tax at source.'
+);
+
+-- Service Details for Income Tax Returns (Service ID: 26)
+INSERT INTO service_details (service_id, overview, full_description, processing_time, documents_required, benefits, faqs) VALUES
+(26,
+'Income Tax Return filing is mandatory for individuals and businesses meeting certain income thresholds. Ensures compliance and enables refund claims.',
+'Professional ITR filing service ensures accurate tax calculation, maximum deductions, and timely compliance. Includes verification and refund processing.',
+'3-5 business days (after document submission)',
+'Form 16|Salary Slips|Bank Statements|Investment Proofs (80C, 80D, etc.)|Rent Receipts|Previous ITR (if any)|TDS Certificates',
+'Legal Compliance|Refund Claims|Loan Processing|Visa Applications|Tax Planning|Documentation',
+'Who must file ITR?|Individuals with income above ₹2.5 lakh (₹3 lakh for senior citizens, ₹5 lakh for super seniors).|What is the due date?|July 31 for individuals, varies for businesses.|Can I file belated return?|Yes, with penalty up to December 31.|What if I miss the deadline?|Belated return can be filed with penalty and interest.|Is e-verification mandatory?|Yes, within 120 days of filing.'
+);
+
+-- Service Details for TDS Returns (Service ID: 27)
+INSERT INTO service_details (service_id, overview, full_description, processing_time, documents_required, benefits, faqs) VALUES
+(27,
+'TDS Return filing is mandatory for all entities deducting tax at source. Quarterly filing ensures compliance and avoids penalties.',
+'Professional TDS return filing service ensures accurate calculation, timely submission, and compliance with TDS provisions.',
+'5-7 business days',
+'TDS Certificates|Challan Details|PAN of Deductees|TDS Details|Form 24Q/26Q/27Q|Previous Returns',
+'Legal Compliance|Avoid Penalties|Smooth Operations|TDS Credit|Good Standing',
+'What is TDS return?|Quarterly return showing details of tax deducted at source.|What are the due dates?|Q1: July 31, Q2: Oct 31, Q3: Jan 31, Q4: May 31.|What is the penalty for late filing?|₹200 per day of delay, subject to maximum of TDS amount.|Which form to use?|Form 24Q for salary, 26Q for non-salary, 27Q for NRIs.|Is TAN mandatory?|Yes, TAN is required for TDS return filing.'
+);
+
+-- Service Details for Add A Director (Service ID: 39)
+INSERT INTO service_details (service_id, overview, full_description, processing_time, documents_required, benefits, faqs) VALUES
+(39,
+'Adding a director to your company requires filing DIR-12 with ROC. Professional service ensures smooth process and compliance.',
+'Add a new director to your company with proper documentation and ROC filing. Includes DIN application if needed.',
+'7-10 business days',
+'Director PAN Card|Director Aadhaar Card|Director Address Proof|Director Photo|Board Resolution|Consent Letter|DSC of Director',
+'Business Expansion|Expertise Addition|Compliance|Proper Documentation|ROC Filing',
+'How to add a director?|File DIR-12 with ROC along with required documents and board resolution.|Is DIN required?|Yes, director must have DIN before appointment.|What documents are needed?|PAN, Aadhaar, address proof, photo, and board resolution.|Can foreign national be director?|Yes, subject to compliance with Companies Act.|What is the fee?|Government fees apply. Our service includes all charges.'
+);
+
+-- Service Details for Company Name Change (Service ID: 49)
+INSERT INTO service_details (service_id, overview, full_description, processing_time, documents_required, benefits, faqs) VALUES
+(49,
+'Company name change requires ROC approval and updating all documents. Professional service ensures smooth transition.',
+'Change your company name with proper ROC approval and documentation. Includes name approval, MOA/AOA amendment, and certificate update.',
+'20-30 business days',
+'Board Resolution|Special Resolution|Name Availability|MOA/AOA|Current Registration Certificate|Digital Signature',
+'Brand Rebranding|Business Alignment|Legal Compliance|Documentation Update|Smooth Transition',
+'How to change company name?|Get name approval, pass special resolution, file forms with ROC.|What is the process?|Name approval → Special resolution → ROC filing → Certificate update.|Can any name be chosen?|Name must be unique and comply with Companies Act guidelines.|What documents need updating?|MOA, AOA, certificates, bank accounts, and all business documents.|How long does it take?|20-30 business days for complete process.'
+);
+
+-- Service Details for Strike Off Company (Service ID: 53)
+INSERT INTO service_details (service_id, overview, full_description, processing_time, documents_required, benefits, faqs) VALUES
+(53,
+'Strike off company when business is no longer operational. Voluntary strike off is faster and cost-effective than winding up.',
+'Strike off your company when it is no longer needed. Includes compliance check, application filing, and closure process.',
+'3-6 months',
+'Board Resolution|Special Resolution|Indemnity Bond|Statement of Accounts|No Objection Certificate|Affidavit|Latest Financial Statements',
+'Cost Effective|Faster Process|Legal Closure|No Liabilities|Clean Exit',
+'What is strike off?|Removal of company name from ROC register when company is defunct.|When can company be struck off?|When company has no operations, assets, or liabilities.|What is the process?|File STK-2 form with ROC after meeting eligibility criteria.|Can struck off company be revived?|Yes, within 20 years with proper application.|What are the requirements?|No assets, no liabilities, all compliances up to date.'
+);
+
+-- Service Details for GST Returns (Service ID: Check your services table for "GST Returns" service ID)
+-- Note: Replace the service_id below with the actual ID from your services table
+-- INSERT INTO service_details (service_id, overview, full_description, processing_time, documents_required, benefits, faqs) VALUES
+-- (YOUR_GST_RETURNS_SERVICE_ID,
+-- 'GST return filing is mandatory for all GST registered businesses. Monthly/quarterly filing ensures compliance and enables input tax credit.',
+-- 'Professional GST return filing service ensures accurate GSTR-1, GSTR-3B, and annual returns. Includes reconciliation and error correction.',
+-- '3-5 business days per return',
+-- 'Sales Invoices|Purchase Invoices|Bank Statements|E-way Bills|Credit/Debit Notes|Input Tax Credit Details|Previous Returns',
+-- 'Legal Compliance|Input Tax Credit|Avoid Penalties|Smooth Operations|Refund Claims',
+-- 'Which returns to file?|GSTR-1 (monthly/quarterly), GSTR-3B (monthly), GSTR-9 (annual).|What are the due dates?|GSTR-1: 11th of next month, GSTR-3B: 20th of next month.|What is the penalty for late filing?|₹50 per day for nil return, ₹200 per day for others.|Can I revise returns?|GSTR-1 can be revised, GSTR-3B cannot.|Is professional help necessary?|Recommended for accuracy and compliance.'
+-- );
 
 -- =====================================================
 -- Admin Users Table (for admin panel)

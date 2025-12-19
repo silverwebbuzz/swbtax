@@ -21,77 +21,90 @@
             </div>
         </div>
 
-        <!-- Highlight Boxes -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-            <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 border-l-4 border-emerald-600">
-                <div class="flex items-center mb-4">
-                    <i class="fas fa-layer-group text-emerald-600 text-5xl mr-4"></i>
-                    <div>
-                        <h3 class="text-3xl font-bold text-gray-900">17</h3>
-                        <p class="text-sm text-gray-600">Categories</p>
+        <!-- Feature Highlights -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+            <!-- 80+ Services -->
+            <div class="group bg-gradient-to-br from-blue-50 to-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2 border-2 border-blue-200 hover:border-blue-500">
+                <div class="flex items-start mb-4">
+                    <div class="bg-blue-100 p-4 rounded-xl mr-4 group-hover:bg-blue-200 transition-colors">
+                        <i class="fas fa-briefcase text-blue-600 text-4xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-4xl font-bold text-gray-900 mb-1">80+</h3>
+                        <p class="text-sm font-semibold text-blue-600 uppercase tracking-wide">Services</p>
                     </div>
                 </div>
-                <p class="text-gray-700 font-medium">We are working in 17 categories</p>
+                <p class="text-gray-700 font-medium leading-relaxed">Comprehensive range of 80+ professional services covering company registration, GST, ITR, trademark, compliance, and more to ensure complete business support</p>
             </div>
 
-            <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 border-l-4 border-blue-600">
-                <div class="flex items-center mb-4">
-                    <i class="fas fa-briefcase text-blue-600 text-5xl mr-4"></i>
-                    <div>
-                        <h3 class="text-3xl font-bold text-gray-900">80+</h3>
-                        <p class="text-sm text-gray-600">Services</p>
+            <!-- Affordable Packages -->
+            <div class="group bg-gradient-to-br from-purple-50 to-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2 border-2 border-purple-200 hover:border-purple-500">
+                <div class="flex items-start mb-4">
+                    <div class="bg-purple-100 p-4 rounded-xl mr-4 group-hover:bg-purple-200 transition-colors">
+                        <i class="fas fa-rupee-sign text-purple-600 text-4xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-1">Affordable</h3>
+                        <p class="text-sm font-semibold text-purple-600 uppercase tracking-wide">Packages</p>
                     </div>
                 </div>
-                <p class="text-gray-700 font-medium">With 80+ services in Indian business to take care of your all business compliances and taxes</p>
+                <p class="text-gray-700 font-medium leading-relaxed">Flexible and affordable pricing packages designed for startups, SMEs, and enterprises. Choose the plan that fits your budget and requirements</p>
             </div>
 
-            <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 border-l-4 border-purple-600">
-                <div class="flex items-center mb-4">
-                    <i class="fas fa-rupee-sign text-purple-600 text-5xl mr-4"></i>
-                    <div>
-                        <h3 class="text-2xl font-bold text-gray-900">Affordable</h3>
-                        <p class="text-sm text-gray-600">Packages</p>
+            <!-- 1 Stop Solution -->
+            <div class="group bg-gradient-to-br from-orange-50 to-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2 border-2 border-orange-200 hover:border-orange-500">
+                <div class="flex items-start mb-4">
+                    <div class="bg-orange-100 p-4 rounded-xl mr-4 group-hover:bg-orange-200 transition-colors">
+                        <i class="fas fa-check-double text-orange-600 text-4xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-1">1 Stop</h3>
+                        <p class="text-sm font-semibold text-orange-600 uppercase tracking-wide">Solution</p>
                     </div>
                 </div>
-                <p class="text-gray-700 font-medium">Affordable packages tailored for every business size</p>
+                <p class="text-gray-700 font-medium leading-relaxed">Complete end-to-end solution for all your statutory compliance, tax filing, registrations, and business needs under one roof</p>
             </div>
 
-            <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 border-l-4 border-orange-600">
-                <div class="flex items-center mb-4">
-                    <i class="fas fa-check-double text-orange-600 text-5xl mr-4"></i>
-                    <div>
-                        <h3 class="text-2xl font-bold text-gray-900">1 Stop</h3>
-                        <p class="text-sm text-gray-600">Solution</p>
+            <!-- 100% Secure -->
+            <div class="group bg-gradient-to-br from-emerald-50 to-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2 border-2 border-emerald-200 hover:border-emerald-500">
+                <div class="flex items-start mb-4">
+                    <div class="bg-emerald-100 p-4 rounded-xl mr-4 group-hover:bg-emerald-200 transition-colors">
+                        <i class="fas fa-shield-alt text-emerald-600 text-4xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-1">100%</h3>
+                        <p class="text-sm font-semibold text-emerald-600 uppercase tracking-wide">Secure</p>
                     </div>
                 </div>
-                <p class="text-gray-700 font-medium">One stop solution for your compliances and taxes</p>
-            </div>
-        </div>
-
-        <!-- Additional Feature Boxes -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-8">
-            <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
-                <i class="fas fa-shield-alt text-emerald-600 text-4xl mb-4"></i>
-                <h3 class="text-lg font-semibold text-gray-900 mb-2">100% Secure</h3>
-                <p class="text-gray-600 text-sm">Your data is safe with us. Complete confidentiality guaranteed.</p>
+                <p class="text-gray-700 font-medium leading-relaxed">Bank-level encryption and strict data privacy protocols ensure your sensitive business information remains completely confidential and secure</p>
             </div>
 
-            <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
-                <i class="fas fa-check-circle text-emerald-600 text-4xl mb-4"></i>
-                <h3 class="text-lg font-semibold text-gray-900 mb-2">Expert Team</h3>
-                <p class="text-gray-600 text-sm">Experienced professionals handling your compliance needs.</p>
+            <!-- Expert Team -->
+            <div class="group bg-gradient-to-br from-emerald-50 to-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2 border-2 border-emerald-200 hover:border-emerald-500">
+                <div class="flex items-start mb-4">
+                    <div class="bg-emerald-100 p-4 rounded-xl mr-4 group-hover:bg-emerald-200 transition-colors">
+                        <i class="fas fa-users-cog text-emerald-600 text-4xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-1">Expert</h3>
+                        <p class="text-sm font-semibold text-emerald-600 uppercase tracking-wide">Team</p>
+                    </div>
+                </div>
+                <p class="text-gray-700 font-medium leading-relaxed">Certified CA, CS, and tax professionals with years of experience ensuring accurate and timely compliance for your business</p>
             </div>
 
-            <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
-                <i class="fas fa-clock text-emerald-600 text-4xl mb-4"></i>
-                <h3 class="text-lg font-semibold text-gray-900 mb-2">Quick Turnaround</h3>
-                <p class="text-gray-600 text-sm">Fast processing with timely delivery of all services.</p>
-            </div>
-
-            <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
-                <i class="fas fa-award text-emerald-600 text-4xl mb-4"></i>
-                <h3 class="text-lg font-semibold text-gray-900 mb-2">Affordable Pricing</h3>
-                <p class="text-gray-600 text-sm">Competitive rates without compromising on quality.</p>
+            <!-- Quick Turnaround -->
+            <div class="group bg-gradient-to-br from-emerald-50 to-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2 border-2 border-emerald-200 hover:border-emerald-500">
+                <div class="flex items-start mb-4">
+                    <div class="bg-emerald-100 p-4 rounded-xl mr-4 group-hover:bg-emerald-200 transition-colors">
+                        <i class="fas fa-clock text-emerald-600 text-4xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-1">Quick</h3>
+                        <p class="text-sm font-semibold text-emerald-600 uppercase tracking-wide">Turnaround</p>
+                    </div>
+                </div>
+                <p class="text-gray-700 font-medium leading-relaxed">Efficient processing with same-day document preparation and fast-track services to meet your urgent business deadlines</p>
             </div>
         </div>
     </div>

@@ -146,6 +146,21 @@ class Database {
             return [];
         }
     }
+
+    /**
+     * Fetch service details by service ID
+     */
+    public function getServiceDetails($serviceId) {
+        try {
+            $stmt = $this->conn->prepare("SELECT * FROM service_details WHERE service_id = :service_id");
+            $stmt->bindParam(':service_id', $serviceId, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetch();
+        } catch(PDOException $e) {
+            error_log("Error fetching service details: " . $e->getMessage());
+            return null;
+        }
+    }
 }
 
 // Initialize database connection
