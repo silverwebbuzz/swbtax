@@ -221,10 +221,9 @@ $featuredServices = array_slice(array_values($featuredServices), 0, 8);
                     </p>
                 </div>
                 <div class="flex flex-wrap gap-4 text-sm">
-                    <a href="#" class="hover:text-emerald-500 transition-colors text-gray-400">Privacy Policy</a>
-                    <a href="#" class="hover:text-emerald-500 transition-colors text-gray-400">Terms of Service</a>
-                    <a href="#" class="hover:text-emerald-500 transition-colors text-gray-400">Refund Policy</a>
-                    <a href="#" class="hover:text-emerald-500 transition-colors text-gray-400">Cookie Policy</a>
+                    <a href="<?php echo $basePath; ?>/privacy-policy.php" class="hover:text-emerald-500 transition-colors text-gray-400">Privacy Policy</a>
+                    <a href="<?php echo $basePath; ?>/terms-and-conditions.php" class="hover:text-emerald-500 transition-colors text-gray-400">Terms of Service</a>
+                    <a href="<?php echo $basePath; ?>/refund-policy.php" class="hover:text-emerald-500 transition-colors text-gray-400">Refund Policy</a>
                 </div>
             </div>
         </div>

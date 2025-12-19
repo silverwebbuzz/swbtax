@@ -68,11 +68,11 @@ class Database {
     }
 
     /**
-     * Fetch all services
+     * Fetch all services (only active ones for frontend)
      */
     public function getServices() {
         try {
-            $stmt = $this->conn->prepare("SELECT * FROM services ORDER BY display_order ASC");
+            $stmt = $this->conn->prepare("SELECT * FROM services WHERE status = 'active' ORDER BY display_order ASC");
             $stmt->execute();
             return $stmt->fetchAll();
         } catch(PDOException $e) {
@@ -86,7 +86,7 @@ class Database {
      */
     public function getServicesByCategory($categoryId) {
         try {
-            $stmt = $this->conn->prepare("SELECT * FROM services WHERE category_id = :category_id ORDER BY display_order ASC");
+            $stmt = $this->conn->prepare("SELECT * FROM services WHERE category_id = :category_id AND status = 'active' ORDER BY display_order ASC");
             $stmt->bindParam(':category_id', $categoryId, PDO::PARAM_INT);
             $stmt->execute();
             return $stmt->fetchAll();

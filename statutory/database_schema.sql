@@ -29,10 +29,12 @@ CREATE TABLE IF NOT EXISTS services (
   price_text VARCHAR(255) NULL,
   is_featured BOOLEAN DEFAULT FALSE,
   display_order INT NOT NULL DEFAULT 0,
+  status ENUM('active', 'inactive') DEFAULT 'active',
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (category_id) REFERENCES service_categories(id) ON DELETE CASCADE,
   INDEX idx_category_id (category_id),
-  INDEX idx_display_order (display_order)
+  INDEX idx_display_order (display_order),
+  INDEX idx_status (status)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Create service_packages table

@@ -20,7 +20,17 @@ $messageType = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = $_POST['action'] ?? 'list';
     
-    if ($action === 'save') {
+    if ($action === 'toggle_status') {
+        $serviceId = $_POST['service_id'] ?? '';
+        if ($serviceId && $adminDb->toggleServiceStatus($serviceId)) {
+            $message = 'Service status updated successfully!';
+            $messageType = 'success';
+        } else {
+            $message = 'Error updating service status. Please try again.';
+            $messageType = 'error';
+        }
+        $action = 'list';
+    } elseif ($action === 'save') {
         $data = [
             'id' => $_POST['id'] ?? '',
             'category_id' => $_POST['category_id'] ?? '',
@@ -91,6 +101,7 @@ if ($action === 'edit' && $serviceId) {
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Featured</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Order</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                     </tr>
@@ -124,10 +135,30 @@ if ($action === 'edit' && $serviceId) {
                                     <span class="px-2 py-1 text-xs font-semibold rounded-full bg-gray-100 text-gray-800">No</span>
                                 <?php endif; ?>
                             </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <?php 
+                                $status = $svc['status'] ?? 'active';
+                                $isActive = $status === 'active';
+                                ?>
+                                <?php if ($isActive): ?>
+                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Active</span>
+                                <?php else: ?>
+                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-800">Inactive</span>
+                                <?php endif; ?>
+                            </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                 <?php echo $svc['display_order']; ?>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <form method="POST" action="" class="inline mr-2">
+                                    <input type="hidden" name="action" value="toggle_status">
+                                    <input type="hidden" name="service_id" value="<?php echo $svc['id']; ?>">
+                                    <button type="submit" 
+                                            class="<?php echo $isActive ? 'text-orange-600 hover:text-orange-900' : 'text-green-600 hover:text-green-900'; ?>">
+                                        <i class="fas <?php echo $isActive ? 'fa-toggle-on' : 'fa-toggle-off'; ?> mr-1"></i>
+                                        <?php echo $isActive ? 'Deactivate' : 'Activate'; ?>
+                                    </button>
+                                </form>
                                 <a href="?action=edit&id=<?php echo $svc['id']; ?>" class="text-blue-600 hover:text-blue-900 mr-4">
                                     <i class="fas fa-edit"></i> Edit
                                 </a>

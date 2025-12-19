@@ -186,6 +186,31 @@ class AdminDatabase {
     }
     
     /**
+     * Toggle service status (active/inactive)
+     */
+    public function toggleServiceStatus($serviceId) {
+        try {
+            // Get current status
+            $stmt = $this->conn->prepare("SELECT status FROM services WHERE id = :id");
+            $stmt->bindParam(':id', $serviceId, PDO::PARAM_INT);
+            $stmt->execute();
+            $service = $stmt->fetch();
+            
+            if ($service) {
+                $newStatus = $service['status'] === 'active' ? 'inactive' : 'active';
+                $updateStmt = $this->conn->prepare("UPDATE services SET status = :status WHERE id = :id");
+                $updateStmt->bindParam(':status', $newStatus);
+                $updateStmt->bindParam(':id', $serviceId, PDO::PARAM_INT);
+                return $updateStmt->execute();
+            }
+            return false;
+        } catch(PDOException $e) {
+            error_log("Error toggling service status: " . $e->getMessage());
+            return false;
+        }
+    }
+    
+    /**
      * Get all packages for a service
      */
     public function getPackagesByServiceId($serviceId) {
