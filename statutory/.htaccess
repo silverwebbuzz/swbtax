@@ -1,0 +1,36 @@
+# Apache .htaccess for clean URLs
+
+# Enable Rewrite Engine
+RewriteEngine On
+
+# Base directory (adjust if statutory folder is not in root)
+RewriteBase /statutory/
+
+# Redirect service.php?id=X to service-detail.php?id=X
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^service/([^/]+)/?$ service.php?id=$1 [L,QSA]
+
+# Default routing - if file doesn't exist, try index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [L,QSA]
+
+# Security headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+# Prevent directory listing
+Options -Indexes
+
+# PHP settings (adjust as needed)
+<IfModule mod_php7.c>
+    php_value upload_max_filesize 10M
+    php_value post_max_size 10M
+    php_value max_execution_time 300
+    php_value max_input_time 300
+</IfModule>
+
