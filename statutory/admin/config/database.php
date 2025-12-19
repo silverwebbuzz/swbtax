@@ -51,13 +51,22 @@ class AdminDatabase {
             $stmt->execute();
             $admin = $stmt->fetch();
             
-            if ($admin && password_verify($password, $admin['password'])) {
-                return $admin;
+            if ($admin) {
+                // Debug: Log password verification attempt
+                error_log("Admin login attempt - Username: " . $username . ", Hash exists: " . (!empty($admin['password']) ? 'Yes' : 'No'));
+                
+                if (password_verify($password, $admin['password'])) {
+                    return $admin;
+                } else {
+                    error_log("Password verification failed for user: " . $username);
+                }
+            } else {
+                error_log("Admin user not found or inactive: " . $username);
             }
             return null;
         } catch(PDOException $e) {
             error_log("Admin authentication error: " . $e->getMessage());
-            return null;
+            throw $e; // Re-throw to show error in login page
         }
     }
     

@@ -1,11 +1,9 @@
 <?php
 $pageTitle = 'Dashboard';
-require_once __DIR__ . '/includes/header.php';
 require_once __DIR__ . '/config/database.php';
+require_once __DIR__ . '/includes/header.php';
 
 // Get statistics
-$conn = $adminDb->getConnection();
-
 $stats = [
     'categories' => 0,
     'services' => 0,
@@ -14,19 +12,31 @@ $stats = [
 ];
 
 try {
-    $stmt = $conn->query("SELECT COUNT(*) as count FROM service_categories");
-    $stats['categories'] = $stmt->fetch()['count'];
+    $conn = $adminDb->getConnection();
     
-    $stmt = $conn->query("SELECT COUNT(*) as count FROM services");
-    $stats['services'] = $stmt->fetch()['count'];
-    
-    $stmt = $conn->query("SELECT COUNT(*) as count FROM service_packages");
-    $stats['packages'] = $stmt->fetch()['count'];
-    
-    $stmt = $conn->query("SELECT COUNT(*) as count FROM package_features");
-    $stats['features'] = $stmt->fetch()['count'];
+    if ($conn) {
+        $stmt = $conn->query("SELECT COUNT(*) as count FROM service_categories");
+        $result = $stmt->fetch();
+        $stats['categories'] = $result ? (int)$result['count'] : 0;
+        
+        $stmt = $conn->query("SELECT COUNT(*) as count FROM services");
+        $result = $stmt->fetch();
+        $stats['services'] = $result ? (int)$result['count'] : 0;
+        
+        $stmt = $conn->query("SELECT COUNT(*) as count FROM service_packages");
+        $result = $stmt->fetch();
+        $stats['packages'] = $result ? (int)$result['count'] : 0;
+        
+        $stmt = $conn->query("SELECT COUNT(*) as count FROM package_features");
+        $result = $stmt->fetch();
+        $stats['features'] = $result ? (int)$result['count'] : 0;
+    }
 } catch(PDOException $e) {
     error_log("Error fetching stats: " . $e->getMessage());
+    // Keep default values on error
+} catch(Exception $e) {
+    error_log("Error in dashboard: " . $e->getMessage());
+    // Keep default values on error
 }
 ?>
 
@@ -102,4 +112,3 @@ try {
 </div>
 
 <?php require_once __DIR__ . '/includes/footer.php'; ?>
-

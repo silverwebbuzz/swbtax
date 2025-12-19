@@ -9,16 +9,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'] ?? '';
     
     if (!empty($username) && !empty($password)) {
-        $admin = $adminDb->authenticateAdmin($username, $password);
-        
-        if ($admin) {
-            $_SESSION['admin_id'] = $admin['id'];
-            $_SESSION['admin_username'] = $admin['username'];
-            $_SESSION['admin_email'] = $admin['email'] ?? '';
-            header('Location: dashboard.php');
-            exit;
-        } else {
-            $error = 'Invalid username or password';
+        try {
+            $admin = $adminDb->authenticateAdmin($username, $password);
+            
+            if ($admin) {
+                $_SESSION['admin_id'] = $admin['id'];
+                $_SESSION['admin_username'] = $admin['username'];
+                $_SESSION['admin_email'] = $admin['email'] ?? '';
+                header('Location: dashboard.php');
+                exit;
+            } else {
+                $error = 'Invalid username or password. Please check your credentials.';
+            }
+        } catch (Exception $e) {
+            $error = 'Database error: ' . $e->getMessage();
+            error_log("Login error: " . $e->getMessage());
         }
     } else {
         $error = 'Please enter both username and password';

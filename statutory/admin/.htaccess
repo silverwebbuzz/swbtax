@@ -1,0 +1,31 @@
+# Admin directory access
+# Allow all PHP files to be accessed directly
+
+# Disable directory listing
+Options -Indexes
+
+# Redirect admin directory to login page
+DirectoryIndex login.php
+
+# Allow PHP execution
+<FilesMatch "\.php$">
+    Require all granted
+</FilesMatch>
+
+# For Apache 2.2 compatibility
+<IfModule !mod_authz_core.c>
+    <FilesMatch "\.php$">
+        Order allow,deny
+        Allow from all
+    </FilesMatch>
+</IfModule>
+
+# Enable rewrite engine for admin
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /statutory/admin/
+    
+    # If accessing directory, redirect to login
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^$ login.php [L]
+</IfModule>

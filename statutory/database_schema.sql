@@ -513,8 +513,9 @@ CREATE TABLE IF NOT EXISTS admin_users (
 -- Insert default superadmin user
 -- Username: admin
 -- Password: admin123 (change this immediately after first login!)
+-- Note: If this hash doesn't work, run fix-admin-password.sql or generate-hash.php
 INSERT INTO admin_users (id, username, email, password, status) VALUES
-('admin-001', 'admin', 'admin@silverwebbuzz.in', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'active')
+('admin-001', 'admin', 'admin@silverwebbuzz.in', '$2y$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', 'active')
 ON DUPLICATE KEY UPDATE username=username;
 
 -- Note: The default password is 'admin123'

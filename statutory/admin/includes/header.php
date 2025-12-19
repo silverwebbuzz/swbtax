@@ -54,7 +54,7 @@ $adminInfo = getAdminInfo();
             <div class="flex items-center mb-4">
                 <i class="fas fa-user-circle text-2xl mr-3"></i>
                 <div>
-                    <p class="font-semibold"><?php echo htmlspecialchars($adminInfo['username']); ?></p>
+                    <p class="font-semibold"><?php echo htmlspecialchars($adminInfo['username'] ?? 'Admin'); ?></p>
                     <p class="text-sm text-gray-400">Super Admin</p>
                 </div>
             </div>
