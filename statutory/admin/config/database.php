@@ -324,5 +324,3 @@ class AdminDatabase {
 }
 
 $adminDb = new AdminDatabase();
-?>
-

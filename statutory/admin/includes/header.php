@@ -1,9 +1,13 @@
 <?php
+// Ensure session is started before including auth
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 require_once __DIR__ . '/../config/auth.php';
 requireAdminLogin();
 
 $adminInfo = getAdminInfo();
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

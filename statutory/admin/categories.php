@@ -1,7 +1,15 @@
 <?php
+// Start output buffering
+ob_start();
+
+// Start session before any output
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 $pageTitle = 'Manage Categories';
-require_once __DIR__ . '/includes/header.php';
 require_once __DIR__ . '/config/database.php';
+require_once __DIR__ . '/includes/header.php';
 
 $categories = $adminDb->getCategories();
 ?>

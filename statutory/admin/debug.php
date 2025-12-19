@@ -4,14 +4,21 @@
  * Access: https://silverwebbuzz.in/statutory/admin/debug.php
  */
 
+// Start output buffering to prevent headers already sent errors
+ob_start();
+
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+
+// Start session first, before any output
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 echo "<h1>Admin Panel Debug</h1>";
 
 // Test 1: Session
 echo "<h2>1. Session Test</h2>";
-session_start();
 echo "Session ID: " . session_id() . "<br>";
 echo "Session Data: <pre>";
 print_r($_SESSION);

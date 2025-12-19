@@ -148,5 +148,3 @@ class Database {
 
 // Initialize database connection
 $db = Database::getInstance();
-?>
-
