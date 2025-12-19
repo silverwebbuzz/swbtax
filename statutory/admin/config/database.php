@@ -30,6 +30,31 @@ class AdminDatabase {
         }
     }
     
+    /**
+     * Toggle category status (active/inactive)
+     */
+    public function toggleCategoryStatus($categoryId) {
+        try {
+            // Get current status
+            $stmt = $this->conn->prepare("SELECT status FROM service_categories WHERE id = :id");
+            $stmt->bindParam(':id', $categoryId, PDO::PARAM_INT);
+            $stmt->execute();
+            $category = $stmt->fetch();
+            
+            if ($category) {
+                $newStatus = $category['status'] === 'active' ? 'inactive' : 'active';
+                $updateStmt = $this->conn->prepare("UPDATE service_categories SET status = :status WHERE id = :id");
+                $updateStmt->bindParam(':status', $newStatus);
+                $updateStmt->bindParam(':id', $categoryId, PDO::PARAM_INT);
+                return $updateStmt->execute();
+            }
+            return false;
+        } catch(PDOException $e) {
+            error_log("Error toggling category status: " . $e->getMessage());
+            return false;
+        }
+    }
+    
     public function getServices() {
         try {
             $stmt = $this->conn->prepare("SELECT * FROM services ORDER BY name");
@@ -95,7 +120,7 @@ class AdminDatabase {
     public function getServiceById($id) {
         try {
             $stmt = $this->conn->prepare("SELECT * FROM services WHERE id = :id");
-            $stmt->bindParam(':id', $id);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
             return $stmt->fetch();
         } catch(PDOException $e) {
@@ -111,12 +136,10 @@ class AdminDatabase {
         try {
             if (empty($data['id'])) {
                 // Create new service
-                $id = $this->generateUUID();
                 $stmt = $this->conn->prepare("
-                    INSERT INTO services (id, category_id, name, description, price, price_text, is_featured, display_order) 
-                    VALUES (:id, :category_id, :name, :description, :price, :price_text, :is_featured, :display_order)
+                    INSERT INTO services (category_id, name, description, price, price_text, is_featured, display_order) 
+                    VALUES (:category_id, :name, :description, :price, :price_text, :is_featured, :display_order)
                 ");
-                $stmt->bindParam(':id', $id);
             } else {
                 // Update existing service
                 $stmt = $this->conn->prepare("
@@ -130,16 +153,16 @@ class AdminDatabase {
                         display_order = :display_order 
                     WHERE id = :id
                 ");
-                $stmt->bindParam(':id', $data['id']);
+                $stmt->bindParam(':id', $data['id'], PDO::PARAM_INT);
             }
             
-            $stmt->bindParam(':category_id', $data['category_id']);
+            $stmt->bindParam(':category_id', $data['category_id'], PDO::PARAM_INT);
             $stmt->bindParam(':name', $data['name']);
             $stmt->bindParam(':description', $data['description']);
             $stmt->bindParam(':price', $data['price']);
             $stmt->bindParam(':price_text', $data['price_text']);
-            $stmt->bindParam(':is_featured', $data['is_featured']);
-            $stmt->bindParam(':display_order', $data['display_order']);
+            $stmt->bindParam(':is_featured', $data['is_featured'], PDO::PARAM_BOOL);
+            $stmt->bindParam(':display_order', $data['display_order'], PDO::PARAM_INT);
             
             return $stmt->execute();
         } catch(PDOException $e) {
@@ -154,7 +177,7 @@ class AdminDatabase {
     public function deleteService($id) {
         try {
             $stmt = $this->conn->prepare("DELETE FROM services WHERE id = :id");
-            $stmt->bindParam(':id', $id);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             return $stmt->execute();
         } catch(PDOException $e) {
             error_log("Error deleting service: " . $e->getMessage());
@@ -168,7 +191,7 @@ class AdminDatabase {
     public function getPackagesByServiceId($serviceId) {
         try {
             $stmt = $this->conn->prepare("SELECT * FROM service_packages WHERE service_id = :service_id ORDER BY display_order");
-            $stmt->bindParam(':service_id', $serviceId);
+            $stmt->bindParam(':service_id', $serviceId, PDO::PARAM_INT);
             $stmt->execute();
             return $stmt->fetchAll();
         } catch(PDOException $e) {
@@ -183,7 +206,7 @@ class AdminDatabase {
     public function getPackageById($id) {
         try {
             $stmt = $this->conn->prepare("SELECT * FROM service_packages WHERE id = :id");
-            $stmt->bindParam(':id', $id);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
             return $stmt->fetch();
         } catch(PDOException $e) {
@@ -198,12 +221,10 @@ class AdminDatabase {
     public function savePackage($data) {
         try {
             if (empty($data['id'])) {
-                $id = $this->generateUUID();
                 $stmt = $this->conn->prepare("
-                    INSERT INTO service_packages (id, service_id, name, price, description, is_popular, display_order) 
-                    VALUES (:id, :service_id, :name, :price, :description, :is_popular, :display_order)
+                    INSERT INTO service_packages (service_id, name, price, description, is_popular, display_order) 
+                    VALUES (:service_id, :name, :price, :description, :is_popular, :display_order)
                 ");
-                $stmt->bindParam(':id', $id);
             } else {
                 $stmt = $this->conn->prepare("
                     UPDATE service_packages SET 
@@ -215,15 +236,15 @@ class AdminDatabase {
                         display_order = :display_order 
                     WHERE id = :id
                 ");
-                $stmt->bindParam(':id', $data['id']);
+                $stmt->bindParam(':id', $data['id'], PDO::PARAM_INT);
             }
             
-            $stmt->bindParam(':service_id', $data['service_id']);
+            $stmt->bindParam(':service_id', $data['service_id'], PDO::PARAM_INT);
             $stmt->bindParam(':name', $data['name']);
             $stmt->bindParam(':price', $data['price']);
             $stmt->bindParam(':description', $data['description']);
-            $stmt->bindParam(':is_popular', $data['is_popular']);
-            $stmt->bindParam(':display_order', $data['display_order']);
+            $stmt->bindParam(':is_popular', $data['is_popular'], PDO::PARAM_BOOL);
+            $stmt->bindParam(':display_order', $data['display_order'], PDO::PARAM_INT);
             
             return $stmt->execute();
         } catch(PDOException $e) {
@@ -238,7 +259,7 @@ class AdminDatabase {
     public function deletePackage($id) {
         try {
             $stmt = $this->conn->prepare("DELETE FROM service_packages WHERE id = :id");
-            $stmt->bindParam(':id', $id);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             return $stmt->execute();
         } catch(PDOException $e) {
             error_log("Error deleting package: " . $e->getMessage());
@@ -252,7 +273,7 @@ class AdminDatabase {
     public function getPackageFeatures($packageId) {
         try {
             $stmt = $this->conn->prepare("SELECT * FROM package_features WHERE package_id = :package_id ORDER BY display_order");
-            $stmt->bindParam(':package_id', $packageId);
+            $stmt->bindParam(':package_id', $packageId, PDO::PARAM_INT);
             $stmt->execute();
             return $stmt->fetchAll();
         } catch(PDOException $e) {
@@ -267,12 +288,10 @@ class AdminDatabase {
     public function savePackageFeature($data) {
         try {
             if (empty($data['id'])) {
-                $id = $this->generateUUID();
                 $stmt = $this->conn->prepare("
-                    INSERT INTO package_features (id, package_id, feature, display_order) 
-                    VALUES (:id, :package_id, :feature, :display_order)
+                    INSERT INTO package_features (package_id, feature, display_order) 
+                    VALUES (:package_id, :feature, :display_order)
                 ");
-                $stmt->bindParam(':id', $id);
             } else {
                 $stmt = $this->conn->prepare("
                     UPDATE package_features SET 
@@ -281,12 +300,12 @@ class AdminDatabase {
                         display_order = :display_order 
                     WHERE id = :id
                 ");
-                $stmt->bindParam(':id', $data['id']);
+                $stmt->bindParam(':id', $data['id'], PDO::PARAM_INT);
             }
             
-            $stmt->bindParam(':package_id', $data['package_id']);
+            $stmt->bindParam(':package_id', $data['package_id'], PDO::PARAM_INT);
             $stmt->bindParam(':feature', $data['feature']);
-            $stmt->bindParam(':display_order', $data['display_order']);
+            $stmt->bindParam(':display_order', $data['display_order'], PDO::PARAM_INT);
             
             return $stmt->execute();
         } catch(PDOException $e) {
@@ -301,7 +320,7 @@ class AdminDatabase {
     public function deletePackageFeature($id) {
         try {
             $stmt = $this->conn->prepare("DELETE FROM package_features WHERE id = :id");
-            $stmt->bindParam(':id', $id);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             return $stmt->execute();
         } catch(PDOException $e) {
             error_log("Error deleting feature: " . $e->getMessage());
@@ -309,18 +328,6 @@ class AdminDatabase {
         }
     }
     
-    /**
-     * Generate UUID (simple version for MySQL)
-     */
-    private function generateUUID() {
-        return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
-            mt_rand(0, 0xffff), mt_rand(0, 0xffff),
-            mt_rand(0, 0xffff),
-            mt_rand(0, 0x0fff) | 0x4000,
-            mt_rand(0, 0x3fff) | 0x8000,
-            mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
-        );
-    }
 }
 
 $adminDb = new AdminDatabase();

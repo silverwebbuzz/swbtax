@@ -54,11 +54,11 @@ class Database {
     }
 
     /**
-     * Fetch all service categories
+     * Fetch all service categories (only active ones for frontend)
      */
     public function getCategories() {
         try {
-            $stmt = $this->conn->prepare("SELECT * FROM service_categories ORDER BY display_order ASC");
+            $stmt = $this->conn->prepare("SELECT * FROM service_categories WHERE status = 'active' ORDER BY display_order ASC");
             $stmt->execute();
             return $stmt->fetchAll();
         } catch(PDOException $e) {
@@ -87,7 +87,7 @@ class Database {
     public function getServicesByCategory($categoryId) {
         try {
             $stmt = $this->conn->prepare("SELECT * FROM services WHERE category_id = :category_id ORDER BY display_order ASC");
-            $stmt->bindParam(':category_id', $categoryId);
+            $stmt->bindParam(':category_id', $categoryId, PDO::PARAM_INT);
             $stmt->execute();
             return $stmt->fetchAll();
         } catch(PDOException $e) {
@@ -102,7 +102,7 @@ class Database {
     public function getServiceById($serviceId) {
         try {
             $stmt = $this->conn->prepare("SELECT * FROM services WHERE id = :id");
-            $stmt->bindParam(':id', $serviceId);
+            $stmt->bindParam(':id', $serviceId, PDO::PARAM_INT);
             $stmt->execute();
             return $stmt->fetch();
         } catch(PDOException $e) {
@@ -117,7 +117,7 @@ class Database {
     public function getServicePackages($serviceId) {
         try {
             $stmt = $this->conn->prepare("SELECT * FROM service_packages WHERE service_id = :service_id ORDER BY display_order ASC");
-            $stmt->bindParam(':service_id', $serviceId);
+            $stmt->bindParam(':service_id', $serviceId, PDO::PARAM_INT);
             $stmt->execute();
             return $stmt->fetchAll();
         } catch(PDOException $e) {
@@ -135,6 +135,8 @@ class Database {
         }
         
         try {
+            // Convert all IDs to integers
+            $packageIds = array_map('intval', $packageIds);
             $placeholders = implode(',', array_fill(0, count($packageIds), '?'));
             $stmt = $this->conn->prepare("SELECT * FROM package_features WHERE package_id IN ($placeholders) ORDER BY display_order ASC");
             $stmt->execute($packageIds);
